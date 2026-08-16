@@ -1,11 +1,11 @@
 function minimumTotal(triangle: number[][]): number {
-  let MinArray = triangle.map(subArray => Math.min(...subArray));
-  let output = 0
-  for(let i=0 ; i< MinArray.length ; i++){
-    output += MinArray[i];
+  const dp = [...triangle[triangle.length - 1]];
+
+  for (let i = triangle.length - 2; i >= 0; i--) {
+    for (let j = 0; j <= i; j++) {
+      dp[j] = triangle[i][j] + Math.min(dp[j], dp[j + 1]);
+    }
   }
 
-
-    return output
-};
-console.log(minimumTotal());
+  return dp[0];
+}
